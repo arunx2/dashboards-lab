@@ -17,6 +17,11 @@ You can match both `field` and `value` with wildcards like this
 ```text
 geo.*: AR
 ```
+You can also use wild card to filter events
+
+```text
+url: *www.opensearch.org*
+```
 ### Filter with a range
 If you have numeric, IP address, geo_point, or date values, you can use comparators to
 compare against another value. The supported comparators are
@@ -32,7 +37,19 @@ so `NOT` and `not` are same.
 ### Nested fields queries
 With DQL, you can query the nested objects with `{}` .
 
-## Examples
+## Examples 
+Make sure you select `opensearch_dashboards_sample_data_logs` as **Index Pattern** in the top left,
+to execute the below samples.
+- You can do a simple search matches any value across fields in the index, To list all events related to `Firefox` 
+  ```text
+    Firefox
+  ```
+  To list events related to `Firefox` or `osx`
+  ```sql
+    Firefox or osx
+  ```
+  plain search can quickly help you find things without knowing much about the schema. But if you know 
+  the schema you can better control your searches.
 - In the sample logs, the user agent is captured in `agent` attribute. If you want to filter out `Linux`. you can use
   ```text
     agent: Linux
@@ -49,7 +66,12 @@ With DQL, you can query the nested objects with `{}` .
   ```text
     phpmemory : *
   ```
-
+- you can match with multiple terms with sets. The below query matches the events
+  if it comes from either `ios` or `osx`
+    ```text
+    machine.os: (osx,ios)
+    ```
+  
 ## Exercises
 
 1. Find out all events which are not originated from Linux. (_Hint: use NOT operator_ )
