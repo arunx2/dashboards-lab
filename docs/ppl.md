@@ -1,5 +1,6 @@
 ## PPL
- PPL is a unix style piped processing language where you can pipe to previous results
+PPL is a rich and powerful unix style piped processing language where you can pipe to previous results.
+You can run PPL queries either in **Query Workbench** or **Event analytics** under Observability
 In this lesson, we will use the ecommerce data.
 
 - To view all documents from an index 
@@ -8,31 +9,61 @@ In this lesson, we will use the ecommerce data.
     ```
 
 - To select specific fields
-    ```
+    ```sql
      search source=opensearch_dashboards_sample_data_ecommerce
    | fields order_id, customer_full_name, taxful_total_price
     ```
-
+- To rename the fields
+  ```sql
+    search source=opensearch_dashboards_sample_data_ecommerce 
+    | where taxful_total_price > 100.00
+    | rename order_id as OrderID, customer_full_name as CustomerName , taxful_total_price as OrderValue 
+    | fields OrderID, CustomerName, OrderValue
+  ```
+  
 - To select documents based on a condition
-    ```
+    ```sql
     search source=opensearch_dashboards_sample_data_ecommerce
    | where taxful_total_price > 100.00
    | fields order_id, customer_full_name, taxful_total_price
     ```
+- To select documents based on compound conditions
+  ```sql
+  search source=opensearch_dashboards_sample_data_ecommerce 
+  | where taxful_total_price > 100 and total_unique_products <= 2
+  | fields order_id, customer_full_name, taxful_total_price
+  ```
   
-- to dedup based on a field
-    ```sql
-    search source=opensearch_dashboards_sample_data_ecommerce
-    | where taxful_total_price > 100.00
-    | dedup customer_gender
-    | fields order_id, customer_full_name, taxful_total_price, customer_gender
-    ```
-- dedup based on customer email.
-- create a runtime field.
-- sort 
-- stats
-- aggregation
-- joins
+- deduplicate based on customer order id. In this data set, we don't have duplicates
+  you can try with email. It will keep the first document by default. 
+  you can have a list of fields as well.you can keep or ignore the empty 
+  values by setting `keepempty=true` (Default: false). It is possible to remove
+  duplicates only if they are consecutive by setting `consecutive=true` (Default: false)
+  ```sql
+  search source=opensearch_dashboards_sample_data_ecommerce
+  | dedup order_id
+  | fields order_id, customer_full_name, email, taxful_total_price, customer_gender | sort -email
+   ```
+- sort the results you can use `+`(Ascending by default) or `-`(descend)
+  ```sql
+  search source=opensearch_dashboards_sample_data_ecommerce
+   | sort - taxful_total_price
+   | fields order_id , customer_full_name , taxful_total_price 
+  ```
+
+- Using `stats` command to calculate the aggregation from search result.
+  ```sql
+  search source=opensearch_dashboards_sample_data_ecommerce 
+  | stats count() , sum( taxful_total_price ) , avg( taxful_total_price ) , max( taxful_total_price )
+  ```
+- you can also group by a field or `span` on timestamp. In this sample, it
+  return the customers order count and total sales value.
+  ```sql
+  source = opensearch_dashboards_sample_data_ecommerce
+   | stats sum( taxful_total_price ), count() as count by customer_id
+   | sort -count
+  ```
+
 
 Request Format
 
@@ -42,10 +73,28 @@ To use the PPL plugin with your own applications, send requests to _plugins/_ppl
 curl -H 'Content-Type: application/json' -X POST localhost:9200/_plugins/_ppl \
 ... -d '{"query" : "source=opensearch_dashboards_sample_data_logs | fields url, machine.os"}'
 ```
-```sql
-    search source=opensearch_dashboards_sample_data_ecommerce | stats count() as email_count by email | sort -email_count | fields email_count, email
-```
 
 ```sql
 source = opensearch_dashboards_sample_data_ecommerce | stats sum( taxful_total_price ), count() as count by customer_id | sort -count
 ```
+
+Exercise:
+1. find out average sales by gender
+2. Find out top manufacturers based on order count
+3. Find out category wise count and total sales value. 
+
+
+Solutions
+1. ```sql
+    source = opensearch_dashboards_sample_data_ecommerce
+    | stats avg( taxful_total_price ) by customer_gender 
+   ```
+2. ```
+   search source=opensearch_dashboards_sample_data_ecommerce
+    | stats count() as cnt by manufacturer
+    | sort -cnt
+   ```
+3. ```sql
+   search source=opensearch_dashboards_sample_data_ecommerce
+   | stats count() , sum( taxful_total_price ) , avg( taxful_total_price ) , max( taxful_total_price ) by category
+   ```
