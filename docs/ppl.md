@@ -34,7 +34,7 @@ In this lesson, we will use the ecommerce data.
   | fields order_id, customer_full_name, taxful_total_price
   ```
   
-- deduplicate based on customer order id. In this data set, we don't have duplicates
+- Deduplicate based on customer order id. In this data set, we don't have duplicates
   you can try with email. It will keep the first document by default. 
   you can have a list of fields as well.you can keep or ignore the empty 
   values by setting `keepempty=true` (Default: false). It is possible to remove
@@ -44,7 +44,7 @@ In this lesson, we will use the ecommerce data.
   | dedup order_id
   | fields order_id, customer_full_name, email, taxful_total_price, customer_gender | sort -email
    ```
-- sort the results you can use `+`(Ascending by default) or `-`(descend)
+- Sort the results you can use `+`(Ascending by default) or `-`(descend)
   ```sql
   search source=opensearch_dashboards_sample_data_ecommerce
    | sort - taxful_total_price
@@ -56,7 +56,7 @@ In this lesson, we will use the ecommerce data.
   search source=opensearch_dashboards_sample_data_ecommerce 
   | stats count() , sum( taxful_total_price ) , avg( taxful_total_price ) , max( taxful_total_price )
   ```
-- you can also group by a field or `span` on timestamp. In this sample, it
+- You can also group by a field or `span` on timestamp. In this sample, it
   return the customers order count and total sales value.
   ```sql
   source = opensearch_dashboards_sample_data_ecommerce
@@ -65,7 +65,7 @@ In this lesson, we will use the ecommerce data.
   ```
 
 Exercise:
-1. find out average sales by gender
+1. Find out average sales by gender
 2. Find out top manufacturers based on order count
 3. Find out category wise count and total sales value. 
 

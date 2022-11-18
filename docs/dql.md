@@ -48,8 +48,9 @@ to execute the below samples.
   ```sql
     Firefox or osx
   ```
-  plain search can quickly help you find things without knowing much about the schema. But if you know 
+  Plain search can quickly help you find things without knowing much about the schema. But if you know 
   the schema you can better control your searches.
+
 - In the sample logs, the user agent is captured in `agent` attribute. If you want to filter out `Linux`. you can use
   ```text
     agent: Linux

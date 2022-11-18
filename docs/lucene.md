@@ -18,7 +18,7 @@ If you want to filter the 4xx errors, you can use range queries. Please note, th
 ```lucene
 response:[400 TO 499]
 ```
-you can match against a set of values
+You can match against a set of values
 ```lucene
 response:(404 OR 503)
 response:(404, 503)
