@@ -90,8 +90,10 @@ to execute the below samples.
   ```text
     phpmemory : *
   ```
+
 - You can match with multiple terms with sets. The below query matches the events
   if it comes from either `ios` or `osx`
+  
     ```text
     machine.os: (osx,ios)
     ```
