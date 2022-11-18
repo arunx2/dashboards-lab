@@ -79,4 +79,4 @@ to execute the below samples.
 3. Filter out events that doesn't have `memory` field.
 4. Find out all events between India (IN) and Japan(JP)
 
-You can find answers [here](./solutions.md)
+You can find answers [here](./solutions.md#dql-exercise-solutions)

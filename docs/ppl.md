@@ -69,4 +69,4 @@ Exercise:
 2. Find out top manufacturers based on order count
 3. Find out category wise count and total sales value. 
 
-You can find answers [here](./solutions.md)
+You can find answers [here](./solutions.md#ppl-exercise-solutions)
