@@ -64,37 +64,9 @@ In this lesson, we will use the ecommerce data.
    | sort -count
   ```
 
-
-Request Format
-
-To use the PPL plugin with your own applications, send requests to _plugins/_ppl, with your query in the request body:
-
-```shell
-curl -H 'Content-Type: application/json' -X POST localhost:9200/_plugins/_ppl \
-... -d '{"query" : "source=opensearch_dashboards_sample_data_logs | fields url, machine.os"}'
-```
-
-```sql
-source = opensearch_dashboards_sample_data_ecommerce | stats sum( taxful_total_price ), count() as count by customer_id | sort -count
-```
-
 Exercise:
 1. find out average sales by gender
 2. Find out top manufacturers based on order count
 3. Find out category wise count and total sales value. 
 
-
-Solutions
-1. ```sql
-    source = opensearch_dashboards_sample_data_ecommerce
-    | stats avg( taxful_total_price ) by customer_gender 
-   ```
-2. ```
-   search source=opensearch_dashboards_sample_data_ecommerce
-    | stats count() as cnt by manufacturer
-    | sort -cnt
-   ```
-3. ```sql
-   search source=opensearch_dashboards_sample_data_ecommerce
-   | stats count() , sum( taxful_total_price ) , avg( taxful_total_price ) , max( taxful_total_price ) by category
-   ```
+You can find answers [here](./solutions.md)

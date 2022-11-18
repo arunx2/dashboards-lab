@@ -79,20 +79,4 @@ to execute the below samples.
 3. Filter out events that doesn't have `memory` field.
 4. Find out all events between India (IN) and Japan(JP)
 
-## Solutions
-1. ```text
-    NOT agent: Linux
-   ```
-2. ```text
-    geo.src: NL
-   ```
-3. ```text
-    memory: *
-   ```
-4. ```text
-    geo.src: IN and geo.dest:JP
-   ```
-   or
-   ```text
-    geo.srcdest : "IN:JP"
-    ```
+You can find answers [here](./solutions.md)
