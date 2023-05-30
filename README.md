@@ -11,3 +11,5 @@ visualizations. However, there are other options to query and view your data in 
 
 Before we begin, lets load some data to OpenSearch Dashboards. In the `Home` page, click on `Add Sample Data`
 and click on `Add Data` to all three available sample data.
+
+![Add Data](/images/add_data.gif)

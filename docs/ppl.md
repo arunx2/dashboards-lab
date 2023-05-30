@@ -2,6 +2,7 @@
 
 PPL is a rich and powerful unix style piped processing language where you can pipe to previous results.
 You can run PPL queries either in **Query Workbench** or **Event analytics** under Observability
+![Navigate to query workbench](/images/navigate-to-query-workbench.gif)
 In this lesson, we will use the ecommerce data.
 
 - To view all documents from an index
