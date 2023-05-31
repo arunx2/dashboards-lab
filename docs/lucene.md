@@ -3,6 +3,7 @@
 OpenSearch Dashboards supports Lucene queries which is native query as OpenSearch is created on
 top of Apache Lucene. You can select the language while querying in **Discover** (_see:_ the button at the end of the
 top search bar)
+![Select Lucene](/images/select_lucene.gif)
 
 To perform a free text search simply enter a text string. 
 
