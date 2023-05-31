@@ -60,11 +60,11 @@ to execute the below samples.
 
   To list events related to `Firefox` or `osx`
 
-  ```sql
+  ```text
     Firefox or osx
   ```
 
-  Plain search can quickly help you find things without knowing much about the schema. But if you know 
+  Plain search can quickly help you find things without knowing much about the schema. But if you know
   the schema you can better control your searches.
 
 - In the sample logs, the user agent is captured in `agent` attribute. If you want to filter out `Linux`. you can use

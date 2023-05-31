@@ -1,3 +1,5 @@
+# Solutions
+
 ## DQL Exercise Solutions
 
 1. ```text

@@ -5,7 +5,7 @@ top of Apache Lucene. You can select the language while querying in **Discover**
 top search bar)
 ![Select Lucene](/images/select_lucene.gif)
 
-To perform a free text search simply enter a text string. 
+To perform a free text search simply enter a text string.
 
 ```lucene
 osx
