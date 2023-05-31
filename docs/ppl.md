@@ -1,6 +1,8 @@
 # PPL
 
 PPL is a rich and powerful unix style piped processing language where you can pipe to previous results.
+PPL supports all SQL [common](https://opensearch.org/docs/latest/search-plugins/sql/functions/) functions, including relevance search, but also introduces few more functions (called [commands](https://opensearch.org/docs/latest/search-plugins/sql/ppl/functions/)) which are available in PPL only.
+
 You can run PPL queries either in **Query Workbench** or **Event analytics** under Observability
 ![Navigate to query workbench](/images/navigate-to-query-workbench.gif)
 In this lesson, we will use the ecommerce data.
